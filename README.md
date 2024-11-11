@@ -31,16 +31,6 @@ La parte superior del proyecto contará con la pantalla lcd y el teclado matrici
 7.	Control de stock de billetes:
 7.1 El cajero debe verificar la disponibilidad de billetes antes de realizar una transacción de retiro. Si no hay suficientes billetes, debe mostrar un mensaje de error.
 
-**Requisitos No Funcionales**
-Rendimiento: El sistema debe procesar cada operación (consulta de saldo, cambio de clave, retiro de dinero) en menos de 5 segundos.
-Disponibilidad: El cajero debe estar disponible el 99% del tiempo, considerando un ciclo de uso constante durante la vida de la carga de las baterías utilizadas.
-Fiabilidad: El sistema debe tener un margen de error de menos del 1% en la entrega de billetes.
-Seguridad: El cajero debe usar autenticación por clave para todas las operaciones sensibles. La clave debe ser cifrada durante su transmisión y almacenamiento.
-Interfaz de usuario: La interfaz debe ser intuitiva y fácil de entender. Los textos en pantalla deben ser claros, y los errores deben ser explicativos.
-Tolerancia a fallos: Si se interrumpe una transacción, debe volver a reiniciarse.
-Mantenibilidad: El sistema debe ser fácil de hacer cambios de mejoras.
-Consumo de energía: El sistema debe operar eficientemente, con las baterías dispuestas durante el tiempo esperado.  
-
 Escenarios de pruebas 
 Consulta de saldo: Se realizarán varias pruebas introduciendo diferentes claves y validando que el saldo se muestre correctamente en la pantalla TFT.
 Prueba de tiempo de respuesta de la pantalla.
