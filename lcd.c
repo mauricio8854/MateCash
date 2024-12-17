@@ -5,6 +5,7 @@
 
 #include "LCD.h"
 #include "pico/stdlib.h"
+#include <stdio.h>
 
 /**
  * @brief Envía un byte al LCD (como comando o dato).
@@ -82,4 +83,16 @@ void displayMessage(const char *message, int row, int col) {
     while (*message) {
         lcd_write_byte(*message++, true);
     }
+}
+
+
+/**
+ * @brief Muestra el mensaje de saldo en el LCD.
+ *
+ * @param current_balance Saldo actual del usuario.
+ */
+void displayBalance(float current_balance) {
+    char buffer[20]; // Buffer para almacenar el mensaje (máx. 20 caracteres)
+    sprintf(buffer, "Saldo: %.2f", current_balance); // Formatear el mensaje con el saldo
+    displayMessage(buffer, 0, 0); // Mostrar en la primera fila y columna
 }

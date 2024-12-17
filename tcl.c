@@ -194,7 +194,7 @@ void reset_state() {
     input_start_time = get_absolute_time();
             displayMessage("Bienvenido MateCash ",0,0);
             displayMessage("                    ",1,0);
-            displayMessage("Ingrese # cuenta:   ",2,0);
+            displayMessage(" Ingrese # cuenta:  ",2,0);
             displayMessage("                    ",3,0);
             printf("Bienvenido a CashMate");
             printf("\nIngrese su ID (6 digitos):\n");
@@ -258,21 +258,37 @@ void process_logged_in_state(char key) {
             break;
         case 'B': // Consultar saldo
             printf("\nConsultando saldo...\n");
+            displayMessage("                    ",0,0);
+            displayMessage("Consultando saldo.. ",1,0);
+            displayMessage("                    ",2,0);
+            displayMessage("                    ",3,0);
             current_state = STATE_CHECK_BALANCE;
             check_balance();
             break;
         case 'C':
             printf("\nIngrese nueva contraseña de 4 dígitos:\n");
+            displayMessage("     Ingrese nueva  ",0,0);
+            displayMessage("    contraseña de 4 ",1,0);
+            displayMessage("      dígitos       ",2,0);
+            displayMessage("                    ",3,0);
             current_state = STATE_CHANGE_PASSWORD;
             input_index = 0;
             input_start_time = get_absolute_time();
             break;
         case 'D':
             printf("\nCerrando sesión...\n");
+            displayMessage(" Cerrando sesión... ",0,0);
+            displayMessage("                    ",1,0);
+            displayMessage("                    ",2,0);
+            displayMessage("                    ",3,0);
             reset_state();
             break;
         default:
             printf("\nOpción no válida\n");
+            displayMessage("                    ",0,0);
+            displayMessage("  Opción no válida  ",1,0);
+            displayMessage("                    ",2,0);
+            displayMessage("                    ",3,0);
             show_menu();
             break;
     }
@@ -311,6 +327,10 @@ void amount_selection(char key) {
             break;
         default:
             printf("\nOpción no válida\n");
+            displayMessage("                    ",0,0);
+            displayMessage("  Opción no válida  ",1,0);
+            displayMessage("                    ",2,0);
+            displayMessage("                    ",3,0);
            amount_menu();
             break;
     }
@@ -329,6 +349,10 @@ void amount_selection(char key) {
 void withdraw_money() {
     if (current_user->is_blocked) {
         printf("\nError: Su cuenta está bloqueada.\n");
+        displayMessage("                    ",0,0);
+        displayMessage("  Su cuenta está    ",1,0);
+        displayMessage("     bloqueada      ",2,0);
+        displayMessage("                    ",3,0);
         reset_state();
         return;
     }
@@ -339,6 +363,10 @@ void withdraw_money() {
     // Verificar disponibilidad de billetes
     if (selected->quantity < 1) {
         printf("\nError: No hay billetes de %d disponibles. Intente con otra denominación.\n", selected->amount);
+        displayMessage("                    ",0,0);
+        displayMessage("  No hay billetes   ",1,0);
+        displayMessage("     disponibles    ",2,0);
+        displayMessage("                    ",3,0);
         amount_menu();
         return;
     }
@@ -346,6 +374,10 @@ void withdraw_money() {
     // Verificar saldo suficiente
     if (selected->amount > current_user->balance) {
         printf("\nError: Fondos insuficientes. Su saldo actual es %.2f\n", current_user->balance);
+        displayMessage("                    ",0,0);
+        displayMessage("       Fondos       ",1,0);
+        displayMessage("    insuficientes   ",2,0);
+        displayMessage("                    ",3,0);
         amount_menu();
         return;
     }
@@ -357,6 +389,10 @@ void withdraw_money() {
     selected->quantity -= 1;
 
     printf("\nÉxito: Retiró %d. Retiro con el valor de %.2f\n", selected->amount); 
+    displayMessage("                    ",0,0);
+    displayMessage("     Retiro         ",1,0);
+    displayMessage("    Éxitoso         ",2,0);
+    displayMessage("                    ",3,0);
 
     // Mostrar balance actualizado
     current_state = STATE_CHECK_BALANCE;
@@ -377,6 +413,10 @@ void check_balance() {
 
     printf("\nSu saldo actual es: %.2f\n", current_user->balance);
     printf("\nPresione '#' para finalizar");
+    displayBalance(current_user->balance);    
+    displayMessage("  Presione '#'      ",1,0);
+    displayMessage(" para finalizar     ",2,0);
+    displayMessage("                    ",3,0);
 }
 /**
  * @brief Procesa la tecla presionada por el usuario según el estado actual del sistema.
@@ -405,14 +445,18 @@ void process_key(char key) {
                             printf("\n¡Usuario bloqueado! Contacte al administrador.\n");
                         } else {
                             printf("\nID de usuario no existe.\n");
+                            displayMessage("   La Cuenta        ",0,0);
+                            displayMessage("       No           ",1,0);
+                            displayMessage("     Existe         ",2,0);
+                            displayMessage("                    ",3,0);
                         }
                         reset_state();
                     } else {
                         printf("\nIngrese contraseña de 4 dígitos:\n");
-                        /*/displayMessage("                    ",0,0);
+                        displayMessage("                    ",0,0);
                         displayMessage("    Ingrese clave:  ",1,0);
                         displayMessage("                    ",2,0);
-                        displayMessage("                    ",3,0);/*/
+                        displayMessage("                    ",3,0);
                         input_start_time = get_absolute_time();                                                     
                         current_state = STATE_ENTER_PASSWORD;
                         input_index = 0;
@@ -438,8 +482,12 @@ void process_key(char key) {
                             current_user->is_blocked = true;
                             printf("\n\n¡Usuario bloqueado! Demasiados intentos fallidos.\n");
                         } else {
-                            printf("\n\nContraseña incorrecta. Intentos restantes: %d\n", 
+                            printf("\n\nContraseña incorrecta. Intentos restantes: %d\n",                             
                                    MAX_FAILED_ATTEMPTS - current_user->failed_attempts);
+                            displayMessage("                    ",0,0);
+                            displayMessage("    Contraseña      ",1,0);
+                            displayMessage("    incorrecta      ",2,0);
+                            displayMessage("                    ",3,0);       
                         }
                         reset_state();
                     }
@@ -455,6 +503,10 @@ void process_key(char key) {
         
             if (key == '#') { // Confirma para salir del estado
                 printf("\nGracias por utilzar nuestros serivicos\n");
+                displayMessage("   Gracias por      ",0,0);
+                displayMessage("  utilzar nuestros  ",1,0);
+                displayMessage("     Servicios      ",2,0);
+                displayMessage("                    ",3,0);                        
                 reset_state();
 
             } else {
@@ -473,6 +525,10 @@ void process_key(char key) {
                 printf("*");
                 if (input_index == PASSWORD_LENGTH) {
                     printf("\nConfirme la nueva contraseña:\n");
+                    displayMessage("     Confirme       ",0,0);
+                    displayMessage("     la nueva       ",1,0);
+                    displayMessage("    contraseña      ",2,0);
+                    displayMessage("                    ",3,0); 
                     current_state = STATE_CONFIRM_PASSWORD;
                     input_index = 0;
                     memset(input_password, 0, sizeof(input_password));
@@ -488,8 +544,18 @@ void process_key(char key) {
                     if (strcmp(new_password, input_password) == 0) {
                         strcpy(current_user->password, new_password);
                         printf("\n¡Contraseña cambiada exitosamente!\n");
+                        displayMessage("     Contraseña     ",0,0);
+                        displayMessage("      cambiada      ",1,0);
+                        displayMessage("     exitosamente   ",2,0);
+                        displayMessage("                    ",3,0); 
+                        
                     } else {
                         printf("\nLas contraseñas no coinciden. Intente de nuevo.\n");
+                        displayMessage("  Las contraseñas   ",0,0);
+                        displayMessage("   no coinciden     ",1,0);
+                        displayMessage("  Intente de nuevo  ",2,0);
+                        displayMessage("                    ",3,0); 
+                        
                     }
                     current_state = STATE_LOGGED_IN;
                     show_menu();

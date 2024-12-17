@@ -43,5 +43,5 @@ void initLCD();
  * @param col Columna inicial donde se desea mostrar el mensaje (0 a 19).
  */
 void displayMessage(const char *message, int row, int col);
-
+void displayBalance(float current_balance);
 #endif // LCD_H

@@ -30,7 +30,10 @@ int main() {
     printf("Ingrese ID de 6 dígitos:\n");
     stdio_init_all();           /**< Inicializa el subsistema */
     initLCD();
-    displayMessage("MATECASH",2,0);
+    displayMessage("    Bienvenido      ",0,0);
+    displayMessage("     MateCash       ",1,0);
+    displayMessage("  Ingrese # cuenta: ",2,0);
+    displayMessage("                    ",3,0);
     init_keypad();                   /**< Inicializa el teclado matricial y configura los pines GPIO correspondientes */
     last_key_time = get_absolute_time();  /**< Registra el tiempo de la última tecla presionada */
     input_start_time = get_absolute_time();   /**< Registra el tiempo de inicio del input */
