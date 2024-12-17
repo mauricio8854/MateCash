@@ -1,4 +1,4 @@
-# MoneyMate
+# MateCash
 Diseño de un cajero electrónico 
 **Descripción:** El proyecto se basa en un cajero electrónico, el cuál contara con una interfaz grafica por medio de una Pantalla Lcd Tft 2.4 Pulgadas 240x320 Spi, la que le permitirá al usuario realizar tres tareas: consultar saldo, retirar dinero o cambiar clave, recibiendo los datos de un teclado matricial 4x4.
 
